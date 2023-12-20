@@ -45,7 +45,7 @@ module MultiVersionCommonCartridge
 
       def organization_element
         CommonCartridge::Elements::Organizations::Organization.new.tap do |element|
-          element.identifier = 'VHL_' + SecureRandom.uuid
+          element.identifier = SecureRandom.uuid
           element.structure = ORGANIZATION_STRUCTURE
           element.root_item = root_item
         end
