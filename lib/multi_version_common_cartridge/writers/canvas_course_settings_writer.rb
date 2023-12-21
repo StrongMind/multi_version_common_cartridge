@@ -27,6 +27,7 @@ module MultiVersionCommonCartridge
       COURSE_SETTINGS_FILENAME = 'course_settings.xml'.freeze
       CANVAS_EXPORT_FILENAME = 'canvas_export.txt'.freeze
       ASSIGNMENT_GROUPS_FILENAME = 'assignment_groups.xml'.freeze
+      MODULE_META_FILENAME = 'module_meta.xml'.freeze
 
       def type
         'webcontent'
@@ -47,11 +48,19 @@ module MultiVersionCommonCartridge
             builder, course_settings_element, 'course'
           )
         end
+
         assignment_groups_doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
           SaxMachineNokogiriXmlSaver.new.save(
             builder, assignment_groups_element, 'assignmentGroups'
           )
         end
+
+        module_meta_doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
+          SaxMachineNokogiriXmlSaver.new.save(
+            builder, module_meta_element, 'modules'
+          )
+        end
+
         File.open(File.join(out_dir, resource_path, COURSE_SETTINGS_FILENAME), 'w') do |file|
           file.write(course_settings_doc.to_xml)
         end
@@ -62,6 +71,10 @@ module MultiVersionCommonCartridge
 
         File.open(File.join(out_dir, resource_path, ASSIGNMENT_GROUPS_FILENAME), 'w') do |file|
           file.write(assignment_groups_doc.to_xml)
+        end
+
+        File.open(File.join(out_dir, resource_path, MODULE_META_FILENAME), 'w') do |file|
+          file.write(module_meta_doc.to_xml)
         end
       end
 
@@ -94,6 +107,74 @@ module MultiVersionCommonCartridge
             element.title = value[:title]
             element.position = value[:position]
             element.group_weight = value[:group_weight]
+          end
+        end
+      end
+
+      def module_meta_element
+        @module_meta_element ||=
+          CanvasCartridge::Elements::Resources::CourseSettings::Modules.new.tap do |element|
+            element.xmlns = required_namespaces['xmlns']
+            element.xmlns_xsi = required_namespaces['xmlns:xsi']
+            element.modules = modules_child_elements
+          end
+      end
+
+      def modules_child_elements
+        return if resource.modules.nil?
+
+        resource.modules.map do |key, value|
+          CanvasCartridge::Elements::Resources::CourseSettings::Module.new.tap do |element|
+            element.identifier = key
+            element.title = value[:title]
+            element.workflow_state = value[:workflow_state]
+            element.position = value[:position]
+            element.require_sequential_progress = value[:require_sequential_progress]
+            element.requirement_count = value[:requirement_count]
+            element.prerequisites = prerequisites_child_elements(value[:prerequisites])
+            element.items = items_child_elements(value[:items])
+            element.completion_requirements = completion_requirements_child_elements(value[:completion_requirements])
+          end
+        end
+      end
+
+      def prerequisites_child_elements(prerequisites)
+        return if prerequisites.nil?
+
+        prerequisites.map do |prerequisite|
+          CanvasCartridge::Elements::Resources::CourseSettings::Prerequisite.new.tap do |element|
+            element.type = prerequisite[:type]
+            element.title = prerequisite[:title]
+            element.identifierref = prerequisite[:identifierref]
+          end
+        end
+      end
+
+      def items_child_elements(items)
+        return if items.nil?
+
+        items.map do |item|
+          CanvasCartridge::Elements::Resources::CourseSettings::Item.new.tap do |element|
+            element.identifier = item[:identifier]
+            element.title = item[:title]
+            element.workflow_state = item[:workflow_state]
+            element.content_type = item[:content_type]
+            element.identifierref = item[:identifierref]
+            element.url = item[:url]
+            element.position = item[:position]
+            element.indent = item[:indent]
+            element.global_identifierref = item[:global_identifierref]
+          end
+        end
+      end
+
+      def completion_requirements_child_elements(completion_requirements)
+        return if completion_requirements.nil?
+
+        completion_requirements.map do |completion_requirement|
+          CanvasCartridge::Elements::Resources::CourseSettings::CompletionRequirement.new.tap do |element|
+            element.type = completion_requirement[:type]
+            element.identifierref = completion_requirement[:identifierref]
           end
         end
       end

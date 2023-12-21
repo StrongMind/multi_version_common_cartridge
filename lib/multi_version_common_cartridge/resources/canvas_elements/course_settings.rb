@@ -40,6 +40,53 @@ module CanvasCartridge
 
           elements 'assignmentGroup', class: AssignmentGroup, as: :groups
         end
+
+        class Prerequisite
+          include SAXMachine
+          attribute :type
+          element :title
+          element :identifierref
+        end
+
+        class Item
+          include SAXMachine
+          attribute :identifier, as: :identifier
+          element :title
+          element :workflow_state
+          element :content_type
+          element :identifierref
+          element :url
+          element :position
+          element :indent
+          element :global_identifierref
+        end
+
+        class CompletionRequirement
+          include SAXMachine
+          attribute :type
+          element :identifierref
+        end
+
+        class Module
+          include SAXMachine
+          attribute :identifier
+          element :title
+          element :workflow_state
+          element :position
+          element :require_sequential_progress
+          element :requirement_count
+          elements :prerequisite, as: :prerequisites, class: Prerequisite
+          elements :item, as: :items, class: Item
+          elements :completionRequirement, as: :completion_requirements, class: CompletionRequirement
+        end
+
+        class Modules
+          include SAXMachine
+          
+          attribute :xmlns
+          attribute 'xmlns:xsi', as: :xmlns_xsi
+          elements :module, as: :modules, class: Module
+        end
       end
     end
   end

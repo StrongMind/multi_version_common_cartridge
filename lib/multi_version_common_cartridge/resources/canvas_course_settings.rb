@@ -19,7 +19,7 @@ module MultiVersionCommonCartridge
     module CanvasCourseSettings
 
       class CanvasCourseSettings < MultiVersionCommonCartridge::Resources::Resource
-        attr_accessor :image_url, :group_weighting_scheme, :assignment_groups
+        attr_accessor :image_url, :group_weighting_scheme, :assignment_groups, :modules
 
         def initialize; end
 
