@@ -4,9 +4,9 @@ module CanvasCartridge
       module CourseSettings
 
         class CourseSettings
-          attr_accessor :identifier
-
           include SAXMachine
+
+          attribute :identifier
 
           attribute :xmlns
           attribute 'xmlns:xsi', as: :xmlns_xsi

@@ -42,23 +42,33 @@ module MultiVersionCommonCartridge
 
       def create_files(out_dir)
         FileUtils.mkdir_p(File.join(out_dir, resource_path))
-        doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
+        course_settings_doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
           SaxMachineNokogiriXmlSaver.new.save(
-            builder, course_settings_element, 'assignment'
+            builder, course_settings_element, 'course'
+          )
+        end
+        assignment_groups_doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
+          SaxMachineNokogiriXmlSaver.new.save(
+            builder, assignment_groups_element, 'assignmentGroups'
           )
         end
         File.open(File.join(out_dir, resource_path, COURSE_SETTINGS_FILENAME), 'w') do |file|
-          file.write(doc.to_xml)
+          file.write(course_settings_doc.to_xml)
         end
 
         File.open(File.join(out_dir, resource_path, CANVAS_EXPORT_FILENAME), 'w') do |file|
           file.write(canvas_export_contents)
+        end
+
+        File.open(File.join(out_dir, resource_path, ASSIGNMENT_GROUPS_FILENAME), 'w') do |file|
+          file.write(assignment_groups_doc.to_xml)
         end
       end
 
       def course_settings_element
         @course_settings_element ||=
           CanvasCartridge::Elements::Resources::CourseSettings::CourseSettings.new.tap do |element|
+            element.identifier = resource.identifier
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.image_url = resource.image_url
@@ -76,6 +86,8 @@ module MultiVersionCommonCartridge
       end
 
       def groups_child_elements
+        return if resource.assignment_groups.nil?
+
         resource.assignment_groups.map do |key, value|
           CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroup.new.tap do |element|
             element.identifier = key

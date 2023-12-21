@@ -216,5 +216,14 @@ describe MultiVersionCommonCartridge::Writers::CanvasCourseSettingsWriter do
         expect(File.read(canvas_export_filename)).to eq('What did the panda say when he was forced out of his natural habitat? Bamboo-zled!')
       end
     end
+
+    it 'creates a xml file with the assignment_groups element' do
+      Dir.mktmpdir do |dir|
+        sub_dir = File.join(dir, 'course_settings')
+        assignment_groups_filename = File.join(sub_dir, 'assignment_groups.xml')
+        course_settings_writer.create_files(dir)
+        expect(File.read(assignment_groups_filename)).to eq(xml_content)
+      end
+    end
   end
 end
