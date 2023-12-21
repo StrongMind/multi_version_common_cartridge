@@ -18,7 +18,8 @@ module MultiVersionCommonCartridge
   module Writers
     class Factory
       RESOURCE_WRITERS = {
-        ::MultiVersionCommonCartridge::Resources::BasicLtiLink::BasicLtiLink => BasicLtiLinkWriter
+        ::MultiVersionCommonCartridge::Resources::BasicLtiLink::BasicLtiLink => BasicLtiLinkWriter,
+        ::MultiVersionCommonCartridge::Resources::CanvasAssignment::CanvasAssignment => CanvasAssignmentWriter,
       }.freeze
 
       def initialize(cartridge, version)

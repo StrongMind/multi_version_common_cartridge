@@ -26,7 +26,6 @@ module MultiVersionCommonCartridge
 
       MESSAGES = {
         no_title: 'A title is required.',
-        no_secure_launch_url: 'A secure launch url is required.',
         no_external_tool_url: 'An external tool url is required.'
       }.freeze
 
