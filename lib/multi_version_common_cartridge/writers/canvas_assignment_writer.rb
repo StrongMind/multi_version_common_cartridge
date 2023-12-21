@@ -66,6 +66,14 @@ module MultiVersionCommonCartridge
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.title = resource.title
+            element.assignment_group_identifierref = resource.assignment_group_identifierref
+            element.points_possible = resource.points_possible
+            element.max_attempts = resource.max_attempts
+            element.allowed_attempts = resource.allowed_attempts
+            element.is_end_of_module_exam = resource.is_end_of_module_exam
+            element.grading_type = resource.grading_type
+            element.submission_type = resource.submission_type
+            element.peer_review_count = resource.peer_review_count
             element.external_tool_url = resource.external_tool_url
           end
       end
