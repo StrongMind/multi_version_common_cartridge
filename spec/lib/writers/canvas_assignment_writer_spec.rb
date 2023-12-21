@@ -129,31 +129,31 @@ describe MultiVersionCommonCartridge::Writers::CanvasAssignmentWriter do
         expect(assignment_element.assignment_group_identifierref).to eq(assignment_group_identifierref)
       end
 
-      it 'sets the assignment element points_possible' do
+      it 'sets the assignment element points possible' do
         expect(assignment_element.points_possible).to eq(points_possible)
       end
 
-      it 'sets the assignment element max_attempts' do
+      it 'sets the assignment element max attempts' do
         expect(assignment_element.max_attempts).to eq(max_attempts)
       end
 
-      it 'sets the assignment element allowed_attempts' do
+      it 'sets the assignment element allowed attempts' do
         expect(assignment_element.allowed_attempts).to eq(allowed_attempts)
       end
 
-      it 'sets the assignment element is_end_of_module_exam' do
+      it 'sets the assignment element is end of module exam' do
         expect(assignment_element.is_end_of_module_exam).to eq(is_end_of_module_exam)
       end
 
-      it 'sets the assignment element grading_type' do
+      it 'sets the assignment element grading type' do
         expect(assignment_element.grading_type).to eq(grading_type)
       end
 
-      it 'sets the assignment element submission_type' do
+      it 'sets the assignment element submission type' do
         expect(assignment_element.submission_type).to eq(submission_type)
       end
 
-      it 'sets the assignment element peer_review_count' do
+      it 'sets the assignment element peer review count' do
         expect(assignment_element.peer_review_count).to eq(peer_review_count)
       end
 
