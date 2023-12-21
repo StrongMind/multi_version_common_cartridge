@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with multi_version_common_cartridge.  If not, see <http://www.gnu.org/licenses/>.
 
+require 'sax-machine'
 require 'multi_version_common_cartridge/version'
 require 'multi_version_common_cartridge/sax_machine_nokogiri_xml_saver'
 
@@ -21,6 +22,7 @@ require 'multi_version_common_cartridge/cartridge_versions'
 require 'multi_version_common_cartridge/item'
 require 'multi_version_common_cartridge/resources/resource'
 require 'multi_version_common_cartridge/resources/basic_lti_link'
+require 'multi_version_common_cartridge/resources/canvas_assignment'
 require 'multi_version_common_cartridge/manifest'
 require 'multi_version_common_cartridge/cartridge'
 require 'multi_version_common_cartridge/xml_definitions'
@@ -30,6 +32,7 @@ require 'multi_version_common_cartridge/writers/resource_writer'
 require 'multi_version_common_cartridge/writers/basic_lti_vendor_writer'
 require 'multi_version_common_cartridge/writers/basic_lti_extension_writer'
 require 'multi_version_common_cartridge/writers/basic_lti_link_writer'
+require 'multi_version_common_cartridge/writers/canvas_assignment_writer'
 require 'multi_version_common_cartridge/writers/manifest_writer'
 require 'multi_version_common_cartridge/writers/manifest_metadata_writer'
 require 'multi_version_common_cartridge/writers/manifest_organization_writer'

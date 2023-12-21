@@ -54,3 +54,7 @@ Metrics/BlockLength:
 Metrics/BlockNesting:
   Exclude:
     - 'spec/**/*'
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - 'spec/**/*'
