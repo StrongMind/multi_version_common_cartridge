@@ -20,6 +20,7 @@ module MultiVersionCommonCartridge
 
     def initialize
       @items = []
+      @resources = []
     end
 
     def manifest
@@ -39,8 +40,12 @@ module MultiVersionCommonCartridge
                      end.flatten
     end
 
+    def add_resource(resource)
+      @resources << resource
+    end
+
     def all_resources
-      @all_resources ||= all_items.map(&:resource).compact
+      @all_resources ||= all_items.map(&:resource).compact + @resources
     end
 
     private def child_items(item, memo)

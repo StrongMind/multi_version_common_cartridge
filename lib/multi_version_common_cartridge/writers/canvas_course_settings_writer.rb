@@ -16,7 +16,7 @@
 
 module MultiVersionCommonCartridge
   module Writers
-    class CourseSettingsWriter < ResourceWriter
+    class CanvasCourseSettingsWriter < ResourceWriter
       REQUIRED_NAMESPACES = {
         MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 => {
           'xmlns' => 'http://canvas.instructure.com/xsd/cccv1p0',
@@ -25,6 +25,8 @@ module MultiVersionCommonCartridge
       }.freeze
 
       COURSE_SETTINGS_FILENAME = 'course_settings.xml'.freeze
+      CANVAS_EXPORT_FILENAME = 'canvas_export.txt'.freeze
+      ASSIGNMENT_GROUPS_FILENAME = 'assignment_groups.xml'.freeze
 
       def type
         'webcontent'
@@ -32,7 +34,9 @@ module MultiVersionCommonCartridge
 
       def files
         [
-          File.join(resource_path, COURSE_SETTINGS_FILENAME)
+          File.join(resource_path, COURSE_SETTINGS_FILENAME),
+          File.join(resource_path, CANVAS_EXPORT_FILENAME),
+          File.join(resource_path, ASSIGNMENT_GROUPS_FILENAME),
         ]
       end
 
@@ -46,6 +50,10 @@ module MultiVersionCommonCartridge
         File.open(File.join(out_dir, resource_path, COURSE_SETTINGS_FILENAME), 'w') do |file|
           file.write(doc.to_xml)
         end
+
+        File.open(File.join(out_dir, resource_path, CANVAS_EXPORT_FILENAME), 'w') do |file|
+          file.write(canvas_export_contents)
+        end
       end
 
       def course_settings_element
@@ -56,6 +64,30 @@ module MultiVersionCommonCartridge
             element.image_url = resource.image_url
             element.group_weighting_scheme = resource.group_weighting_scheme
           end
+      end
+
+      def assignment_groups_element
+        @assignment_groups_element ||=
+          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroups.new.tap do |element|
+            element.xmlns = required_namespaces['xmlns']
+            element.xmlns_xsi = required_namespaces['xmlns:xsi']
+            element.groups = groups_child_elements
+          end
+      end
+
+      def groups_child_elements
+        resource.assignment_groups.map do |key, value|
+          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroup.new.tap do |element|
+            element.identifier = key
+            element.title = value[:title]
+            element.position = value[:position]
+            element.group_weight = value[:group_weight]
+          end
+        end
+      end
+
+      def canvas_export_contents
+        'What did the panda say when he was forced out of his natural habitat? Bamboo-zled!'
       end
 
       private def validate_external_tool_url

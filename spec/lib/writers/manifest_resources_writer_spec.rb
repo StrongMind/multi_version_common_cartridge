@@ -13,9 +13,9 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
 
       it 'raises an error' do
         expect { writer }.to raise_error(
-          ArgumentError,
-          format(described_class::UNSUPPORTED_VERSION_MSG_TEMPLATE, version: version)
-        )
+                               ArgumentError,
+                               format(described_class::UNSUPPORTED_VERSION_MSG_TEMPLATE, version: version)
+                             )
       end
     end
 
@@ -72,5 +72,54 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
         expect(writer.root_resource_element.resources).to eq(resource_elements)
       end
     end
+  end
+
+  context 'when finalizing canvas course' do
+    let(:version) { MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 }
+    let(:identifier) { 'some identifier' }
+    let(:image_url) { 'some image url' }
+    let(:group_weighting_scheme) { 'some group weighting scheme' }
+    let(:canvas_resource) do
+      ccs = MultiVersionCommonCartridge::Resources::CanvasCourseSettings::CanvasCourseSettings.new
+      ccs.identifier = identifier
+      ccs.image_url = image_url
+      ccs.group_weighting_scheme = group_weighting_scheme
+      ccs
+    end
+
+    before do
+      cartridge.add_resource(canvas_resource)
+
+      writer.finalize
+    end
+
+    it 'has a resource element for the canvas course settings' do
+      expect(writer.root_resource_element.resources.count).to eq(1)
+    end
+
+    it 'has the identifier' do
+      expect(writer.root_resource_element.resources.first.identifier).to eq(identifier)
+    end
+
+    it 'has the type' do
+      expect(writer.root_resource_element.resources.first.type).to eq('webcontent')
+    end
+
+    it 'has the files' do
+      expect(writer.root_resource_element.resources.first.files.count).to eq(3)
+    end
+
+    it 'has the course settings file' do
+      expect(writer.root_resource_element.resources.first.files[0].href).to eq('course_settings/course_settings.xml')
+    end
+
+    it 'has the canvas export file' do
+      expect(writer.root_resource_element.resources.first.files[1].href).to eq('course_settings/canvas_export.txt')
+    end
+
+    it 'has the assignment groups file' do
+      expect(writer.root_resource_element.resources.first.files[2].href).to eq('course_settings/assignment_groups.xml')
+    end
+
   end
 end

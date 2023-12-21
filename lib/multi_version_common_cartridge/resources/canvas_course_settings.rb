@@ -16,39 +16,13 @@
 
 module MultiVersionCommonCartridge
   module Resources
-    module CourseSettings
+    module CanvasCourseSettings
 
-      class CourseSettings < MultiVersionCommonCartridge::Resources::Resource
-        attr_accessor :image_url, :group_weighting_scheme
+      class CanvasCourseSettings < MultiVersionCommonCartridge::Resources::Resource
+        attr_accessor :image_url, :group_weighting_scheme, :assignment_groups
 
         def initialize; end
 
-      end
-    end
-  end
-end
-module CanvasCartridge
-  module Elements
-    module Resources
-      module CourseSettings
-
-        class CourseSettings
-          attr_accessor :identifier
-
-          include SAXMachine
-
-          attribute :xmlns
-          attribute 'xmlns:xsi', as: :xmlns_xsi
-
-          element 'image_url', as: :image_url
-          element 'group_weighting_scheme', as: :group_weighting_scheme
-
-          def self.type
-            :course_settings
-          end
-
-          def self.pattern; end
-        end
       end
     end
   end
