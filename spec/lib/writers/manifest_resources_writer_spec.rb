@@ -77,10 +77,12 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
   context 'when finalizing canvas course' do
     let(:version) { MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 }
     let(:identifier) { 'some identifier' }
+    let(:href) { 'some href' }
     let(:image_url) { 'some image url' }
     let(:group_weighting_scheme) { 'some group weighting scheme' }
     let(:canvas_resource) do
       ccs = MultiVersionCommonCartridge::Resources::CanvasCourseSettings::CanvasCourseSettings.new
+      ccs.href = href
       ccs.identifier = identifier
       ccs.image_url = image_url
       ccs.group_weighting_scheme = group_weighting_scheme
@@ -101,12 +103,16 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
       expect(writer.root_resource_element.resources.first.identifier).to eq(identifier)
     end
 
+    it 'has the href' do
+      expect(writer.root_resource_element.resources.first.href).to eq(href)
+    end
+
     it 'has the type' do
       expect(writer.root_resource_element.resources.first.type).to eq('webcontent')
     end
 
     it 'has the files' do
-      expect(writer.root_resource_element.resources.first.files.count).to eq(3)
+      expect(writer.root_resource_element.resources.first.files.count).to eq(4)
     end
 
     it 'has the course settings file' do
@@ -119,6 +125,10 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
 
     it 'has the assignment groups file' do
       expect(writer.root_resource_element.resources.first.files[2].href).to eq('course_settings/assignment_groups.xml')
+    end
+
+    it 'has the module meta file' do
+      expect(writer.root_resource_element.resources.first.files[3].href).to eq('course_settings/module_meta.xml')
     end
 
   end

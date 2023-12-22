@@ -17,7 +17,7 @@
 module MultiVersionCommonCartridge
   module Resources
     class Resource
-      attr_accessor :identifier
+      attr_accessor :identifier, :href
     end
   end
 end

@@ -20,7 +20,7 @@ module MultiVersionCommonCartridge
 
       class CanvasAssignment < MultiVersionCommonCartridge::Resources::Resource
         attr_accessor :title, :assignment_group_identifierref, :points_possible, :max_attempts, :allowed_attempts,
-                      :is_end_of_module_exam, :grading_type, :submission_type, :peer_review_count, :external_tool_url
+                      :is_end_of_module_exam, :grading_type, :submission_types, :peer_review_count, :external_tool_url
 
         def initialize; end
 

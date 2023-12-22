@@ -38,6 +38,7 @@ module MultiVersionCommonCartridge
           File.join(resource_path, COURSE_SETTINGS_FILENAME),
           File.join(resource_path, CANVAS_EXPORT_FILENAME),
           File.join(resource_path, ASSIGNMENT_GROUPS_FILENAME),
+          File.join(resource_path, MODULE_META_FILENAME),
         ]
       end
 

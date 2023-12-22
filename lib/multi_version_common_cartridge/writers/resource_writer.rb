@@ -34,6 +34,7 @@ module MultiVersionCommonCartridge
         CommonCartridge::Elements::Resources::Resource.new.tap do |element|
           element.identifier = resource.identifier
           element.type = type
+          element.href = resource.href
           element.files = files.map do |file|
             CommonCartridge::Elements::Resources::File.new(href: file)
           end
@@ -42,7 +43,7 @@ module MultiVersionCommonCartridge
 
       def type
         raise NotImplementedError, 'Subclasses must implement the type method ' \
-        'that returns the correct resource type.'
+          'that returns the correct resource type.'
       end
 
       def files

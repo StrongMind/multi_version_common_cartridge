@@ -4,12 +4,11 @@ module CanvasCartridge
       module CanvasAssignment
 
         class Assignment
-          attr_accessor :identifier
-
           include SAXMachine
 
           attribute :xmlns
           attribute 'xmlns:xsi', as: :xmlns_xsi
+          attribute :identifier, as: :identifier
 
           element 'title', as: :title
           element 'assignment_group_identifierref', as: :assignment_group_identifierref
@@ -18,7 +17,7 @@ module CanvasCartridge
           element 'allowed_attempts', as: :allowed_attempts
           element 'is_end_of_module_exam', as: :is_end_of_module_exam
           element 'grading_type', as: :grading_type
-          element 'submission_type', as: :submission_type
+          element 'submission_types', as: :submission_types
           element 'peer_review_count', as: :peer_review_count
           element 'external_tool_url', as: :external_tool_url
 

@@ -13,7 +13,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasAssignmentWriter do
   let(:allowed_attempts) { 1 }
   let(:is_end_of_module_exam) { false }
   let(:grading_type) { 'points' }
-  let(:submission_type) { 'external_tool' }
+  let(:submission_types) { 'external_tool' }
   let(:peer_review_count) { 0 }
   let(:external_tool_url) { 'some external tool url' }
 
@@ -98,7 +98,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasAssignmentWriter do
       canvas_assignment.allowed_attempts = allowed_attempts
       canvas_assignment.is_end_of_module_exam = is_end_of_module_exam
       canvas_assignment.grading_type = grading_type
-      canvas_assignment.submission_type = submission_type
+      canvas_assignment.submission_types = submission_types
       canvas_assignment.peer_review_count = peer_review_count
       canvas_assignment.external_tool_url = external_tool_url
       canvas_assignment_writer.finalize
@@ -150,7 +150,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasAssignmentWriter do
       end
 
       it 'sets the assignment element submission type' do
-        expect(assignment_element.submission_type).to eq(submission_type)
+        expect(assignment_element.submission_types).to eq(submission_types)
       end
 
       it 'sets the assignment element peer review count' do
