@@ -30,6 +30,7 @@ module MultiVersionCommonCartridge
       }.freeze
 
       CANVAS_ASSIGNMENT_FILENAME = 'assignment_settings.xml'.freeze
+      CANVAS_ASSIGNMENT_HTML_FILENAME = 'assignment.html'.freeze
 
       def finalize
         super
@@ -43,7 +44,8 @@ module MultiVersionCommonCartridge
 
       def files
         [
-          File.join(resource_path, CANVAS_ASSIGNMENT_FILENAME)
+          File.join(resource_path, CANVAS_ASSIGNMENT_FILENAME),
+          File.join(resource_path, CANVAS_ASSIGNMENT_HTML_FILENAME)
         ]
       end
 
@@ -56,6 +58,10 @@ module MultiVersionCommonCartridge
         end
         File.open(File.join(out_dir, resource_path, CANVAS_ASSIGNMENT_FILENAME), 'w') do |file|
           file.write(doc.to_xml)
+        end
+
+        File.open(File.join(out_dir, resource_path, CANVAS_ASSIGNMENT_HTML_FILENAME), 'w') do |file|
+          file.write("<p></p>")
         end
       end
 
