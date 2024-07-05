@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'multi_version_common_cartridge/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'multi_version_common_cartridge'
+  spec.name = 'strongmind_multi_version_common_cartridge'
   spec.version = MultiVersionCommonCartridge::VERSION
   spec.authors = ['StrongMind']
   spec.email = ['vendor@strongmind.com']
