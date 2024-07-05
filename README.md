@@ -3,8 +3,23 @@ A gem for writing different versions of Common Cartridges.
 
 It supports Common Cartridge version 1.1, 1.2, 1.3 and Thin CC version 1.2 and 1.3.
 
+## Installation
+[Ruby Gems](https://rubygems.org/gems/strongmind_multi_version_common_cartridge)
+
+Gemfile:
+``` ruby
+gem 'strongmind_multi_version_common_cartridge', '~> 1.0', '>= 1.0.5'
+```
+
+Direct Install:
+``` ruby
+gem install strongmind_multi_version_common_cartridge
+```
+
 ## Usage
 ``` ruby
+require 'multi_version_common_cartridge'
+
 # Create a Common Cartridge
 cartridge = MultiVersionCommonCartridge::Cartridge.new
 cartridge.manifest.set_title('My cartridge')
