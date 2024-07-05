@@ -13,6 +13,8 @@ Gem::Specification.new do |spec|
   spec.description = 'Target versions supported: 1.1, 1.2, 1.3; Thin 1.2, 1.3'
   spec.homepage = 'https://github.com/StrongMind/multi_version_common_cartridge'
 
+  spec.require_paths = ["lib"]
+
   spec.files = `git ls-files -z`.split("\x0").reject do |file|
     file.match(%r{^(test|spec|features)/})
   end
