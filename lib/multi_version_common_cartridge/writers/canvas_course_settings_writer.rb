@@ -132,16 +132,22 @@ module MultiVersionCommonCartridge
             element.position = value[:position]
             element.require_sequential_progress = value[:require_sequential_progress]
             element.requirement_count = value[:requirement_count]
-            element.prerequisites = prerequisites_child_elements(value[:prerequisites])
-            element.items = items_child_elements(value[:items])
-            element.completion_requirements = completion_requirements_child_elements(value[:completion_requirements])
+            element.root_prerequisites = prerequisites_root_element(value[:prerequisites])
+            element.root_items = items_root_element(value[:items])
+            element.root_requirements = completion_requirements_root_element(value[:completion_requirements])
           end
         end
       end
 
-      def prerequisites_child_elements(prerequisites)
+      def prerequisites_root_element(prerequisites)
         return if prerequisites.nil?
 
+        CanvasCartridge::Elements::Resources::CourseSettings::Prerequisites.new.tap do |element|
+          element.prerequisites = prerequisites_child_elements(prerequisites)
+        end
+      end
+
+      def prerequisites_child_elements(prerequisites)
         prerequisites.map do |prerequisite|
           CanvasCartridge::Elements::Resources::CourseSettings::Prerequisite.new.tap do |element|
             element.type = prerequisite[:type]
@@ -151,9 +157,15 @@ module MultiVersionCommonCartridge
         end
       end
 
-      def items_child_elements(items)
+      def items_root_element(items)
         return if items.nil?
 
+        CanvasCartridge::Elements::Resources::CourseSettings::Items.new.tap do |element|
+          element.items = items_child_elements(items)
+        end
+      end
+
+      def items_child_elements(items)
         items.map do |item|
           CanvasCartridge::Elements::Resources::CourseSettings::Item.new.tap do |element|
             element.identifier = item[:identifier]
@@ -169,9 +181,15 @@ module MultiVersionCommonCartridge
         end
       end
 
-      def completion_requirements_child_elements(completion_requirements)
+      def completion_requirements_root_element(completion_requirements)
         return if completion_requirements.nil?
 
+        CanvasCartridge::Elements::Resources::CourseSettings::CompletionRequirements.new.tap do |element|
+          element.completion_requirements = completion_requirements_child_elements(completion_requirements)
+        end
+      end
+
+      def completion_requirements_child_elements(completion_requirements)
         completion_requirements.map do |completion_requirement|
           CanvasCartridge::Elements::Resources::CourseSettings::CompletionRequirement.new.tap do |element|
             element.type = completion_requirement[:type]

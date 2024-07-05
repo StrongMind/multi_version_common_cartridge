@@ -48,6 +48,12 @@ module CanvasCartridge
           element :identifierref
         end
 
+        class Prerequisites
+          include SAXMachine
+
+          elements :prerequisite, as: :prerequisites, class: Prerequisite
+        end
+
         class Item
           include SAXMachine
           attribute :identifier, as: :identifier
@@ -61,10 +67,22 @@ module CanvasCartridge
           element :global_identifierref
         end
 
+        class Items
+          include SAXMachine
+
+          elements :item, as: :items, class: Item
+        end
+
         class CompletionRequirement
           include SAXMachine
           attribute :type
           element :identifierref
+        end
+
+        class CompletionRequirements
+          include SAXMachine
+
+          elements :completionRequirement, as: :completion_requirements, class: CompletionRequirement
         end
 
         class Module
@@ -75,14 +93,14 @@ module CanvasCartridge
           element :position
           element :require_sequential_progress
           element :requirement_count
-          elements :prerequisite, as: :prerequisites, class: Prerequisite
-          elements :item, as: :items, class: Item
-          elements :completionRequirement, as: :completion_requirements, class: CompletionRequirement
+          element :prerequisites, as: :root_prerequisites, class: Prerequisites
+          element :items, as: :root_items, class: Items
+          element :completionRequirements, as: :root_requirements, class: CompletionRequirements
         end
 
         class Modules
           include SAXMachine
-          
+
           attribute :xmlns
           attribute 'xmlns:xsi', as: :xmlns_xsi
           elements :module, as: :modules, class: Module
