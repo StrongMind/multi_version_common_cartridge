@@ -30,9 +30,6 @@ jobs:
         env:
           BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{github.repository_owner}}:${{secrets.GITHUB_TOKEN}}
 
-      - name: Migrate the dummy db for specs
-        run: cd spec/dummy && RAILS_ENV=test bundle exec rails db:migrate
-
       - name: Test
         run: bundle exec rspec
 
