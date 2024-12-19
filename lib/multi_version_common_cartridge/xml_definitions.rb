@@ -37,13 +37,15 @@ module MultiVersionCommonCartridge
         'xmlns' => 'http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1',
         'xmlns:lom' => 'http://ltsc.ieee.org/xsd/imsccv1p1/LOM/resource',
         'xmlns:lomimscc' => 'http://ltsc.ieee.org/xsd/imsccv1p1/LOM/manifest',
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        'xmlns:imsdt' => 'http://www.imsglobal.org/xsd/imsccv1p1/imsdt_v1p1'
       },
       MultiVersionCommonCartridge::CartridgeVersions::CC_1_2_0 => {
         'xmlns' => 'http://www.imsglobal.org/xsd/imsccv1p2/imscp_v1p1',
         'xmlns:lom' => 'http://ltsc.ieee.org/xsd/imsccv1p2/LOM/resource',
         'xmlns:lomimscc' => 'http://ltsc.ieee.org/xsd/imsccv1p2/LOM/manifest',
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        'xmlns:imsdt' => 'http://www.imsglobal.org/xsd/imsccv1p1/imsdt_v1p1'
       },
       MultiVersionCommonCartridge::CartridgeVersions::CC_1_3_0 => {
         'xmlns' => 'http://www.imsglobal.org/xsd/imsccv1p3/imscp_v1p1',
