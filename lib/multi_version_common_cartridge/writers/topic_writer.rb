@@ -12,7 +12,10 @@ module MultiVersionCommonCartridge
       end
 
       def write(dir)
-        File.write(File.join(dir, 'topic.xml'), '<topic></topic>')
+        doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
+          SaxMachineNokogiriXmlSaver.new.save(builder, topic_element, 'topic')
+        end
+        File.write(File.join(dir, 'topic.xml'), doc.to_xml)
       end
 
       def topic_element
