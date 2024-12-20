@@ -5,6 +5,8 @@ module MultiVersionCommonCartridge
     class TopicWriter < ResourceWriter
       include SupportedVersions
 
+      CANVAS_TOPIC_IDENTIFIER_SUFFIX = '_canvasTopic'.freeze
+
       def type
         'imsdt_xmlv1p1'
       end
@@ -38,7 +40,7 @@ module MultiVersionCommonCartridge
         return [] unless resource.canvas_topic
 
         [
-          "#{resource.identifier}_canvasTopic"
+          "#{resource.identifier}#{CANVAS_TOPIC_IDENTIFIER_SUFFIX}"
         ]
       end
 

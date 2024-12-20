@@ -29,8 +29,6 @@ module MultiVersionCommonCartridge
         no_external_tool_url: 'An external tool url is required.'
       }.freeze
 
-      CANVAS_TOPIC_FILENAME_SUFFIX = '_canvasTopic.xml'.freeze
-
       def finalize
         super
         validate_title
@@ -47,7 +45,7 @@ module MultiVersionCommonCartridge
             builder, canvas_topic_element, 'assignment'
           )
         end
-        File.open(File.join(out_dir, "#{resource.identifier}#{CANVAS_TOPIC_FILENAME_SUFFIX}"), 'w') do |file|
+        File.open(File.join(out_dir, "#{resource.identifier}.xml"), 'w') do |file|
           file.write(doc.to_xml)
         end
 
