@@ -37,7 +37,7 @@ module MultiVersionCommonCartridge
       end
 
       def type
-        'imsdt_xmlv1p1'
+        'webcontent'
       end
 
       def create_files(out_dir)
@@ -82,7 +82,7 @@ module MultiVersionCommonCartridge
 
       def files
         [
-         "#{resource.identifier}.xml"
+          "#{resource.identifier}.xml"
         ]
       end
 
