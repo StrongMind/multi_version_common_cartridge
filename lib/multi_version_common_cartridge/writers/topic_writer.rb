@@ -35,7 +35,7 @@ module MultiVersionCommonCartridge
       end
 
       def dependencies
-        return [] unless resource.is_canvas
+        return [] unless resource.canvas_topic
 
         [
           "#{resource.identifier}_canvasTopic"
