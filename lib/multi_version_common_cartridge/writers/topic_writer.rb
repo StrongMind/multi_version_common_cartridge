@@ -2,12 +2,13 @@
 
 module MultiVersionCommonCartridge
   module Writers
-    class TopicWriter
+    class TopicWriter < ResourceWriter
       include SupportedVersions
 
       attr_reader :topic
 
       def initialize(topic, version)
+        super
         @topic = topic
         @version = validate_version(version)
       end

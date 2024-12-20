@@ -21,6 +21,8 @@ module MultiVersionCommonCartridge
         ::MultiVersionCommonCartridge::Resources::BasicLtiLink::BasicLtiLink => BasicLtiLinkWriter,
         ::MultiVersionCommonCartridge::Resources::CanvasAssignment::CanvasAssignment => CanvasAssignmentWriter,
         ::MultiVersionCommonCartridge::Resources::CanvasCourseSettings::CanvasCourseSettings => CanvasCourseSettingsWriter,
+        ::MultiVersionCommonCartridge::Resources::Topic => Writers::TopicWriter,
+        ::MultiVersionCommonCartridge::Resources::CanvasTopic => Writers::CanvasTopicWriter,
       }.freeze
 
       def initialize(cartridge, version)
