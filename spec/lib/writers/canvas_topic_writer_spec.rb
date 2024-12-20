@@ -196,7 +196,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
 
     it 'creates a xml file with the assignment element' do
       Dir.mktmpdir do |dir|
-        filename = File.join(dir, "#{canvas_topic.identifier}_canvasTopic.xml")
+        filename = File.join(dir, "#{canvas_topic.identifier}.xml")
         canvas_topic_writer.create_files(dir)
         expect(File.read(filename)).to eq(xml_content)
       end
