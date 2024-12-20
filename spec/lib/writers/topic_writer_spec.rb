@@ -34,7 +34,6 @@ describe MultiVersionCommonCartridge::Writers::TopicWriter do
 
     it 'sets the type attribute' do
       write
-      puts xml_file.to_xml
       expect(xml_file.at_xpath('//*:topic/*:text').attributes['type'].value).to eq('text/html')
     end
 
