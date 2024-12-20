@@ -60,15 +60,16 @@ module MultiVersionCommonCartridge
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.identifier = resource.identifier
             element.title = resource.title
+            assignment_resource = resource.assignment
             element.assignment = MultiVersionCommonCartridge::Elements::Canvas::Assignment.new.tap do |assignment|
-              assignment.assignment_group_identifierref = resource.assignment_group_identifierref
-              assignment.points_possible = resource.points_possible
-              assignment.max_attempts = resource.max_attempts
-              assignment.allowed_attempts = resource.allowed_attempts
-              assignment.is_end_of_module_exam = resource.is_end_of_module_exam
-              assignment.grading_type = resource.grading_type
-              assignment.submission_types = resource.submission_types
-              assignment.peer_review_count = resource.peer_review_count
+              assignment.assignment_group_identifierref = assignment_resource.assignment_group_identifierref
+              assignment.points_possible = assignment_resource.points_possible
+              assignment.max_attempts = assignment_resource.max_attempts
+              assignment.allowed_attempts = assignment_resource.allowed_attempts
+              assignment.is_end_of_module_exam = assignment_resource.is_end_of_module_exam
+              assignment.grading_type = assignment_resource.grading_type
+              assignment.submission_types = assignment_resource.submission_types
+              assignment.peer_review_count = assignment_resource.peer_review_count
             end
 
             element.position = resource.position
