@@ -30,7 +30,15 @@ module MultiVersionCommonCartridge
 
       def files
         [
-          "#{topic.identifier}.xml"
+          "#{resource.identifier}.xml"
+        ]
+      end
+
+      def dependencies
+        return [] unless resource.is_canvas
+
+        [
+          "#{resource.identifier}_canvasTopic"
         ]
       end
 

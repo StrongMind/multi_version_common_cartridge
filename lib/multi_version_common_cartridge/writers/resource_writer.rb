@@ -38,6 +38,9 @@ module MultiVersionCommonCartridge
           element.files = files.map do |file|
             CommonCartridge::Elements::Resources::File.new(href: file)
           end
+          element.dependencies = dependencies.map do |dependency|
+            CommonCartridge::Elements::Resources::Dependency.new(identifierref: dependency)
+          end
         end
       end
 
@@ -47,6 +50,10 @@ module MultiVersionCommonCartridge
       end
 
       def files
+        []
+      end
+
+      def dependencies
         []
       end
     end
