@@ -15,6 +15,7 @@
 # along with multi_version_common_cartridge.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'sax-machine'
+require 'common_cartridge'
 require 'multi_version_common_cartridge/version'
 require 'multi_version_common_cartridge/sax_machine_nokogiri_xml_saver'
 

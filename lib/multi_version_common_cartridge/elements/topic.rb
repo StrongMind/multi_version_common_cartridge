@@ -17,6 +17,7 @@ module MultiVersionCommonCartridge
       element 'title', as: :title
       element 'text_', as: :text, class: TopicText
 
+      element 'attachments', class: ::CommonCartridge::Elements::Resources::Attachments::RootAttachment, as: :attachment_root
     end
 
   end

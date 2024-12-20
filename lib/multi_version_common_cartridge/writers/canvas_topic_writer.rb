@@ -42,7 +42,7 @@ module MultiVersionCommonCartridge
         FileUtils.mkdir_p(File.join(out_dir))
         doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
           SaxMachineNokogiriXmlSaver.new.save(
-            builder, canvas_topic_element, 'assignment'
+            builder, canvas_topic_element, 'topicMeta'
           )
         end
         File.open(File.join(out_dir, "#{resource.identifier}.xml"), 'w') do |file|
@@ -57,9 +57,12 @@ module MultiVersionCommonCartridge
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.identifier = resource.identifier
+            element.topic_id = resource.identifier.gsub(/_canvasTopic$/, '')
             element.title = resource.title
             assignment_resource = resource.assignment
             element.assignment = MultiVersionCommonCartridge::Elements::Canvas::Assignment.new.tap do |assignment|
+              assignment.title = resource.title
+              assignment.identifier = resource.identifier
               assignment.assignment_group_identifierref = assignment_resource.assignment_group_identifierref
               assignment.points_possible = assignment_resource.points_possible
               assignment.max_attempts = assignment_resource.max_attempts
