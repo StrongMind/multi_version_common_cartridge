@@ -13,6 +13,10 @@ module MultiVersionCommonCartridge
         @version = validate_version(version)
       end
 
+      def type
+        'imsdt_xmlv1p1'
+      end
+
       def write(dir)
         doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
           SaxMachineNokogiriXmlSaver.new.save(builder, topic_element, 'topic')
