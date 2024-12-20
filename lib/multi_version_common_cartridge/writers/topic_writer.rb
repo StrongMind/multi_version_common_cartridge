@@ -17,11 +17,11 @@ module MultiVersionCommonCartridge
         'imsdt_xmlv1p1'
       end
 
-      def write(dir)
+      def create_files(dir)
         doc = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |builder|
           SaxMachineNokogiriXmlSaver.new.save(builder, topic_element, 'topic')
         end
-        File.write(File.join(dir, 'topic.xml'), doc.to_xml)
+        File.write(File.join(dir, "#{topic.identifier}.xml"), doc.to_xml)
       end
 
       def topic_element
@@ -34,6 +34,12 @@ module MultiVersionCommonCartridge
             text.type = 'text/html'
           end
         end
+      end
+
+      def files
+        [
+          "#{topic.identifier}.xml"
+        ]
       end
 
       private def required_namespaces

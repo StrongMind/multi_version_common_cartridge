@@ -80,6 +80,12 @@ module MultiVersionCommonCartridge
           end
       end
 
+      def files
+        [
+         "#{topic.identifier}.xml"
+        ]
+      end
+
       private def validate_title
         raise StandardError, MESSAGES[:no_title] unless resource.title
       end
