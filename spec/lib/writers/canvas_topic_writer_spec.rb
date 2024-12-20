@@ -4,6 +4,7 @@ require 'multi_version_common_cartridge'
 describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
   let(:canvas_topic) { MultiVersionCommonCartridge::Resources::CanvasTopic.new }
   let(:canvas_topic_writer) { described_class.new(canvas_topic, version) }
+  let(:canvas_assignment) { MultiVersionCommonCartridge::Resources::CanvasAssignment::CanvasAssignment.new }
   let(:version) { MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 }
   let(:identifier) { 'some identifier' }
   let(:title) { 'some title' }
@@ -19,8 +20,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
   let(:workflow_state) { 'active' }
   let(:discussion_type) { 'threaded' }
   let(:type) { 'topic' }
-  let(:topic_id) { 'topic_id' }
-  let(:xml_file) { Nokogiri.parse(File.read("#{dir}/topic_id_canvasTopic.xml")) }
+  let(:xml_file) { Nokogiri.parse(File.read("#{dir}/#{identifier}_canvasTopic.xml")) }
 
   describe '#initialize' do
     context 'when a non supported version is specified,' do
@@ -87,15 +87,15 @@ describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
     before do
       canvas_topic.identifier = identifier
       canvas_topic.title = title
-      canvas_topic.topic_id = topic_id
-      canvas_topic.assignment_group_identifierref = assignment_group_identifierref
-      canvas_topic.points_possible = points_possible
-      canvas_topic.max_attempts = max_attempts
-      canvas_topic.allowed_attempts = allowed_attempts
-      canvas_topic.is_end_of_module_exam = is_end_of_module_exam
-      canvas_topic.grading_type = grading_type
-      canvas_topic.submission_types = submission_types
-      canvas_topic.peer_review_count = peer_review_count
+      canvas_topic.assignment = canvas_assignment
+      canvas_assignment.assignment_group_identifierref = assignment_group_identifierref
+      canvas_assignment.points_possible = points_possible
+      canvas_assignment.max_attempts = max_attempts
+      canvas_assignment.allowed_attempts = allowed_attempts
+      canvas_assignment.is_end_of_module_exam = is_end_of_module_exam
+      canvas_assignment.grading_type = grading_type
+      canvas_assignment.submission_types = submission_types
+      canvas_assignment.peer_review_count = peer_review_count
       canvas_topic.position = position
       canvas_topic.workflow_state = workflow_state
       canvas_topic.discussion_type = discussion_type
@@ -122,10 +122,6 @@ describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
 
       it 'sets the title' do
         expect(topic_element.title).to eq(title)
-      end
-
-      it 'sets the topic id' do
-        expect(topic_element.topic_id).to eq(topic_id)
       end
 
       it 'sets the element assignment_group_identifierref' do
@@ -195,11 +191,12 @@ describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
       allow(nokogiri_builder).to receive(:to_xml).and_return(xml_content)
 
       canvas_topic.identifier = identifier
+      canvas_topic.assignment = canvas_assignment
     end
 
     it 'creates a xml file with the assignment element' do
       Dir.mktmpdir do |dir|
-        filename = File.join(dir, "#{canvas_topic.topic_id}_canvasTopic.xml")
+        filename = File.join(dir, "#{canvas_topic.identifier}_canvasTopic.xml")
         canvas_topic_writer.create_files(dir)
         expect(File.read(filename)).to eq(xml_content)
       end
