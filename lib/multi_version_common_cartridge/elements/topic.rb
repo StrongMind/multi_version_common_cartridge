@@ -1,5 +1,13 @@
 module MultiVersionCommonCartridge
   module Elements
+    class TopicText
+      include SAXMachine
+
+      attribute :type
+
+      element :text
+    end
+
     class Topic
       include SAXMachine
 
@@ -7,8 +15,9 @@ module MultiVersionCommonCartridge
       attribute 'xmlns:xsi', as: :xmlns_xsi
 
       element 'title', as: :title
-      element 'text_', as: :text
+      element 'text_', as: :text, class: TopicText
 
     end
+
   end
 end

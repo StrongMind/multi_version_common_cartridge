@@ -24,7 +24,10 @@ module MultiVersionCommonCartridge
           element.xmlns_xsi = required_namespaces['xmlns:xsi']
           element.xmlns = required_namespaces['xmlns:imsdt']
           element.title = topic.title
-          element.text = topic.text
+          element.text = MultiVersionCommonCartridge::Elements::TopicText.new.tap do |text|
+            text.text = topic.text
+            text.type = 'text/html'
+          end
         end
       end
 

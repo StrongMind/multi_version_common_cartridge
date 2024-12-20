@@ -32,6 +32,12 @@ describe MultiVersionCommonCartridge::Writers::TopicWriter do
       expect(xml_file.at_xpath('//*:topic/*:text').text).to eq(text)
     end
 
+    it 'sets the type attribute' do
+      write
+      puts xml_file.to_xml
+      expect(xml_file.at_xpath('//*:topic/*:text').attributes['type'].value).to eq('text/html')
+    end
+
     context 'when the export version 1.2.0' do
       let(:version) { MultiVersionCommonCartridge::CartridgeVersions::CC_1_2_0 }
 
