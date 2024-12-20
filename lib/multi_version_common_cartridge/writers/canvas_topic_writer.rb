@@ -82,7 +82,7 @@ module MultiVersionCommonCartridge
 
       def files
         [
-         "#{topic.identifier}.xml"
+         "#{resource.identifier}.xml"
         ]
       end
 
