@@ -67,7 +67,7 @@ module MultiVersionCommonCartridge
 
       def canvas_assignment_element
         @canvas_assignment_element ||=
-          CanvasCartridge::Elements::Resources::CanvasAssignment::Assignment.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Assignment.new.tap do |element|
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.identifier = resource.identifier

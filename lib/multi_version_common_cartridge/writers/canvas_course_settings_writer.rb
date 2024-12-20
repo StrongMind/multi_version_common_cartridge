@@ -81,7 +81,7 @@ module MultiVersionCommonCartridge
 
       def course_settings_element
         @course_settings_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::CourseSettings.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::CourseSettings.new.tap do |element|
             element.identifier = resource.identifier
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
@@ -92,7 +92,7 @@ module MultiVersionCommonCartridge
 
       def assignment_groups_element
         @assignment_groups_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroups.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::AssignmentGroups.new.tap do |element|
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.groups = groups_child_elements
@@ -103,7 +103,7 @@ module MultiVersionCommonCartridge
         return if resource.assignment_groups.nil?
 
         resource.assignment_groups.map do |key, value|
-          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroup.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::AssignmentGroup.new.tap do |element|
             element.identifier = key
             element.title = value[:title]
             element.position = value[:position]
@@ -114,7 +114,7 @@ module MultiVersionCommonCartridge
 
       def module_meta_element
         @module_meta_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::Modules.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Modules.new.tap do |element|
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.modules = modules_child_elements
