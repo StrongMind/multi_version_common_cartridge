@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'multi_version_common_cartridge'
 
 describe MultiVersionCommonCartridge::Writers::CanvasTopicWriter do
-  let(:canvas_topic) { MultiVersionCommonCartridge::CanvasTopic.new }
+  let(:canvas_topic) { MultiVersionCommonCartridge::Resources::CanvasTopic.new }
   let(:canvas_topic_writer) { described_class.new(canvas_topic, version) }
   let(:version) { MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 }
   let(:identifier) { 'some identifier' }

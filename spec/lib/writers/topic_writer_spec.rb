@@ -7,7 +7,7 @@ describe MultiVersionCommonCartridge::Writers::TopicWriter do
     let(:dir) { Dir.mktmpdir }
     let(:topic_element) { topic_writer.topic_element }
     let(:xml_file) { Nokogiri.parse(File.read("#{dir}/topic.xml")) }
-    let(:topic) { MultiVersionCommonCartridge::Topic.new.tap { |t| t.title = title; t.text = text } }
+    let(:topic) { MultiVersionCommonCartridge::Resources::Topic.new.tap { |t| t.title = title; t.text = text } }
     let(:title) { 'Some title' }
     let(:text) { 'Some text' }
 
