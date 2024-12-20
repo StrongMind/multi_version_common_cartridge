@@ -7,7 +7,8 @@ module MultiVersionCommonCartridge
 
       attr_reader :topic
 
-      def initialize(version)
+      def initialize(topic, version)
+        @topic = topic
         @version = validate_version(version)
       end
 
@@ -22,6 +23,8 @@ module MultiVersionCommonCartridge
         @topic_element ||= MultiVersionCommonCartridge::Elements::Topic.new.tap do |element|
           element.xmlns_xsi = required_namespaces['xmlns:xsi']
           element.xmlns = required_namespaces['xmlns:imsdt']
+          element.title = topic.title
+          element.topic_text = topic.text
         end
       end
 
