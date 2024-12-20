@@ -47,7 +47,7 @@ module MultiVersionCommonCartridge
             builder, canvas_topic_element, 'assignment'
           )
         end
-        File.open(File.join(out_dir, "#{resource.topic_id}#{CANVAS_TOPIC_FILENAME_SUFFIX}"), 'w') do |file|
+        File.open(File.join(out_dir, "#{resource.identifier}#{CANVAS_TOPIC_FILENAME_SUFFIX}"), 'w') do |file|
           file.write(doc.to_xml)
         end
 
@@ -59,7 +59,6 @@ module MultiVersionCommonCartridge
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.identifier = resource.identifier
-            element.topic_id = resource.topic_id
             element.title = resource.title
             element.assignment = MultiVersionCommonCartridge::Elements::Canvas::Assignment.new.tap do |assignment|
               assignment.assignment_group_identifierref = resource.assignment_group_identifierref
