@@ -45,7 +45,7 @@ module MultiVersionCommonCartridge
     end
 
     def all_resources
-      @all_resources ||= all_items.map(&:resource).compact + @resources
+      @all_resources ||= get_resources
     end
 
     private def child_items(item, memo)
@@ -53,6 +53,18 @@ module MultiVersionCommonCartridge
         memo << child
         child_items(child, memo)
       end
+    end
+
+    private
+
+    def get_resources
+      all_resources = all_items.flat_map do |item|
+        next if item.resource.nil?
+
+        item.resource.dependencies << item.resource
+      end
+
+      all_resources.compact + @resources
     end
   end
 end
