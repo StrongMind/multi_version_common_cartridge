@@ -7,7 +7,7 @@ module MultiVersionCommonCartridge
       attribute 'xmlns:xsi', as: :xmlns_xsi
 
       element 'title', as: :title
-      element 'text', as: :topic_text
+      element 'text_', as: :text
 
     end
   end

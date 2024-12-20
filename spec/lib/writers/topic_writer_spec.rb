@@ -60,6 +60,5 @@ describe MultiVersionCommonCartridge::Writers::TopicWriter do
       end
     end
 
-
   end
 end

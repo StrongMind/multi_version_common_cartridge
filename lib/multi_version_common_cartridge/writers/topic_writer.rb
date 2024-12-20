@@ -24,7 +24,7 @@ module MultiVersionCommonCartridge
           element.xmlns_xsi = required_namespaces['xmlns:xsi']
           element.xmlns = required_namespaces['xmlns:imsdt']
           element.title = topic.title
-          element.topic_text = topic.text
+          element.text = topic.text
         end
       end
 
