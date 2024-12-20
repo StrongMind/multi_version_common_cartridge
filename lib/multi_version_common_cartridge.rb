@@ -45,4 +45,5 @@ require 'multi_version_common_cartridge/writers/cartridge_writer'
 require 'multi_version_common_cartridge/writers/factory'
 require 'multi_version_common_cartridge/writers/topic_writer'
 require 'multi_version_common_cartridge/elements/topic'
+require 'multi_version_common_cartridge/topic'
 
