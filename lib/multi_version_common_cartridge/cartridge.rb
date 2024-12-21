@@ -61,7 +61,7 @@ module MultiVersionCommonCartridge
       all_resources = all_items.flat_map do |item|
         next if item.resource.nil?
 
-        item.resource.dependencies << item.resource
+        item.resource.dependencies.insert(0, item.resource)
       end
 
       all_resources.compact + @resources
