@@ -18,6 +18,10 @@ module MultiVersionCommonCartridge
   module Resources
     class Resource
       attr_accessor :identifier, :href
+
+      def dependencies
+        []
+      end
     end
   end
 end

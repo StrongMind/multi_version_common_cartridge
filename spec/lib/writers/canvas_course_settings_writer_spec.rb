@@ -89,7 +89,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasCourseSettingsWriter do
       end
 
       it 'returns an assignment groups element' do
-        expect(assignment_groups_element).to be_a(CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroups)
+        expect(assignment_groups_element).to be_a(MultiVersionCommonCartridge::Elements::Canvas::AssignmentGroups)
       end
 
       it 'sets the required xml namespaces' do
@@ -146,7 +146,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasCourseSettingsWriter do
       end
 
       it 'returns a course settings element' do
-        expect(course_settings_element).to be_a(CanvasCartridge::Elements::Resources::CourseSettings::CourseSettings)
+        expect(course_settings_element).to be_a(MultiVersionCommonCartridge::Elements::Canvas::CourseSettings)
       end
 
       it 'sets the required xml namespaces' do

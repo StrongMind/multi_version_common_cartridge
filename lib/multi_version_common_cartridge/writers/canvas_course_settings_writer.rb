@@ -81,7 +81,7 @@ module MultiVersionCommonCartridge
 
       def course_settings_element
         @course_settings_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::CourseSettings.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::CourseSettings.new.tap do |element|
             element.identifier = resource.identifier
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
@@ -92,7 +92,7 @@ module MultiVersionCommonCartridge
 
       def assignment_groups_element
         @assignment_groups_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroups.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::AssignmentGroups.new.tap do |element|
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.groups = groups_child_elements
@@ -103,7 +103,7 @@ module MultiVersionCommonCartridge
         return if resource.assignment_groups.nil?
 
         resource.assignment_groups.map do |key, value|
-          CanvasCartridge::Elements::Resources::CourseSettings::AssignmentGroup.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::AssignmentGroup.new.tap do |element|
             element.identifier = key
             element.title = value[:title]
             element.position = value[:position]
@@ -114,7 +114,7 @@ module MultiVersionCommonCartridge
 
       def module_meta_element
         @module_meta_element ||=
-          CanvasCartridge::Elements::Resources::CourseSettings::Modules.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Modules.new.tap do |element|
             element.xmlns = required_namespaces['xmlns']
             element.xmlns_xsi = required_namespaces['xmlns:xsi']
             element.modules = modules_child_elements
@@ -125,7 +125,7 @@ module MultiVersionCommonCartridge
         return if resource.modules.nil?
 
         resource.modules.map do |key, value|
-          CanvasCartridge::Elements::Resources::CourseSettings::Module.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Module.new.tap do |element|
             element.identifier = key
             element.title = value[:title]
             element.workflow_state = value[:workflow_state]
@@ -142,14 +142,14 @@ module MultiVersionCommonCartridge
       def prerequisites_root_element(prerequisites)
         return if prerequisites.nil?
 
-        CanvasCartridge::Elements::Resources::CourseSettings::Prerequisites.new.tap do |element|
+        MultiVersionCommonCartridge::Elements::Canvas::Prerequisites.new.tap do |element|
           element.prerequisites = prerequisites_child_elements(prerequisites)
         end
       end
 
       def prerequisites_child_elements(prerequisites)
         prerequisites.map do |prerequisite|
-          CanvasCartridge::Elements::Resources::CourseSettings::Prerequisite.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Prerequisite.new.tap do |element|
             element.type = prerequisite[:type]
             element.title = prerequisite[:title]
             element.identifierref = prerequisite[:identifierref]
@@ -160,14 +160,14 @@ module MultiVersionCommonCartridge
       def items_root_element(items)
         return if items.nil?
 
-        CanvasCartridge::Elements::Resources::CourseSettings::Items.new.tap do |element|
+        MultiVersionCommonCartridge::Elements::Canvas::Items.new.tap do |element|
           element.items = items_child_elements(items)
         end
       end
 
       def items_child_elements(items)
         items.map do |item|
-          CanvasCartridge::Elements::Resources::CourseSettings::Item.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::Item.new.tap do |element|
             element.identifier = item[:identifier]
             element.title = item[:title]
             element.workflow_state = item[:workflow_state]
@@ -184,14 +184,14 @@ module MultiVersionCommonCartridge
       def completion_requirements_root_element(completion_requirements)
         return if completion_requirements.nil?
 
-        CanvasCartridge::Elements::Resources::CourseSettings::CompletionRequirements.new.tap do |element|
+        MultiVersionCommonCartridge::Elements::Canvas::CompletionRequirements.new.tap do |element|
           element.completion_requirements = completion_requirements_child_elements(completion_requirements)
         end
       end
 
       def completion_requirements_child_elements(completion_requirements)
         completion_requirements.map do |completion_requirement|
-          CanvasCartridge::Elements::Resources::CourseSettings::CompletionRequirement.new.tap do |element|
+          MultiVersionCommonCartridge::Elements::Canvas::CompletionRequirement.new.tap do |element|
             element.type = completion_requirement[:type]
             element.identifierref = completion_requirement[:identifierref]
           end

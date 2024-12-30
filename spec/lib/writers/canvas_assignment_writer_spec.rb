@@ -113,7 +113,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasAssignmentWriter do
       end
 
       it 'returns a canvas assignment element' do
-        expect(assignment_element).to be_a(CanvasCartridge::Elements::Resources::CanvasAssignment::Assignment)
+        expect(assignment_element).to be_a(MultiVersionCommonCartridge::Elements::Canvas::Assignment)
       end
 
       it 'sets the required xml namespaces' do

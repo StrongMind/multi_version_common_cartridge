@@ -21,6 +21,8 @@ module MultiVersionCommonCartridge
         ::MultiVersionCommonCartridge::Resources::BasicLtiLink::BasicLtiLink => BasicLtiLinkWriter,
         ::MultiVersionCommonCartridge::Resources::CanvasAssignment::CanvasAssignment => CanvasAssignmentWriter,
         ::MultiVersionCommonCartridge::Resources::CanvasCourseSettings::CanvasCourseSettings => CanvasCourseSettingsWriter,
+        ::MultiVersionCommonCartridge::Resources::Topic => Writers::TopicWriter,
+        ::MultiVersionCommonCartridge::Resources::CanvasTopic => Writers::CanvasTopicWriter
       }.freeze
 
       def initialize(cartridge, version)
@@ -52,8 +54,10 @@ module MultiVersionCommonCartridge
 
       def resource_writer(resource)
         return @resource_writers[resource] if @resource_writers.key?(resource)
+
         writer_class = RESOURCE_WRITERS[resource.class]
         raise "Unknown resource '#{resource.class.name}'" unless writer_class
+
         @resource_writers[resource] = writer_class.new(resource, @version)
       end
     end
