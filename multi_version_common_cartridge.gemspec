@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'activesupport', '> 2.0'
-  spec.add_dependency 'common_cartridge_parser', '~> 1.0'
+  spec.add_dependency 'common_cartridge_parser', '~> 1.0.9'
 
   spec.add_development_dependency 'rspec', '~> 3.8'
   spec.add_development_dependency 'rubocop'
