@@ -28,6 +28,7 @@ module MultiVersionCommonCartridge
       CANVAS_EXPORT_FILENAME = 'canvas_export.txt'.freeze
       ASSIGNMENT_GROUPS_FILENAME = 'assignment_groups.xml'.freeze
       MODULE_META_FILENAME = 'module_meta.xml'.freeze
+      SYLLABUS_FILENAME = 'syllabus.html'.freeze
 
       def type
         'webcontent'
@@ -39,6 +40,7 @@ module MultiVersionCommonCartridge
           File.join(resource_path, CANVAS_EXPORT_FILENAME),
           File.join(resource_path, ASSIGNMENT_GROUPS_FILENAME),
           File.join(resource_path, MODULE_META_FILENAME),
+          File.join(resource_path, SYLLABUS_FILENAME)
         ]
       end
 
@@ -77,6 +79,14 @@ module MultiVersionCommonCartridge
         File.open(File.join(out_dir, resource_path, MODULE_META_FILENAME), 'w') do |file|
           file.write(module_meta_doc.to_xml)
         end
+
+        File.open(File.join(out_dir, resource_path, SYLLABUS_FILENAME), 'w') do |file|
+          file.write(syllabus_contents)
+        end
+      end
+
+      def syllabus_contents
+        "<html><body><h1>Syllabus</h1>#{resource.syllabus_body}</body></html>"
       end
 
       def course_settings_element
