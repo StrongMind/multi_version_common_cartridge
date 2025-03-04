@@ -80,8 +80,10 @@ module MultiVersionCommonCartridge
           file.write(module_meta_doc.to_xml)
         end
 
-        File.open(File.join(out_dir, resource_path, SYLLABUS_FILENAME), 'w') do |file|
-          file.write(syllabus_contents)
+        if resource.syllabus_body
+          File.open(File.join(out_dir, resource_path, SYLLABUS_FILENAME), 'w') do |file|
+            file.write(syllabus_contents)
+          end
         end
       end
 
