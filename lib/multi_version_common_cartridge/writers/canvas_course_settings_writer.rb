@@ -35,13 +35,14 @@ module MultiVersionCommonCartridge
       end
 
       def files
-        [
+        file_list = [
           File.join(resource_path, COURSE_SETTINGS_FILENAME),
           File.join(resource_path, CANVAS_EXPORT_FILENAME),
           File.join(resource_path, ASSIGNMENT_GROUPS_FILENAME),
-          File.join(resource_path, MODULE_META_FILENAME),
-          File.join(resource_path, SYLLABUS_FILENAME)
+          File.join(resource_path, MODULE_META_FILENAME)
         ]
+        file_list << File.join(resource_path, SYLLABUS_FILENAME) if resource.syllabus_body
+        file_list
       end
 
       def create_files(out_dir)

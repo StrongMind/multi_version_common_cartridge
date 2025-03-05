@@ -131,5 +131,21 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
       expect(writer.root_resource_element.resources.first.files[3].href).to eq('course_settings/module_meta.xml')
     end
 
+    context 'when syllabus body is set' do
+      let(:syllabus_body) { 'some syllabus body' }
+
+      before do
+        canvas_resource.syllabus_body = syllabus_body
+        writer.finalize
+      end
+
+      it 'has the syllabus file' do
+        expect(writer.root_resource_element.resources.first.files[4].href).to eq('course_settings/syllabus.html')
+      end
+
+      it 'has the files' do
+        expect(writer.root_resource_element.resources.first.files.count).to eq(5)
+      end
+    end
   end
 end
