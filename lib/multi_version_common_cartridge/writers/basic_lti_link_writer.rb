@@ -152,7 +152,7 @@ module MultiVersionCommonCartridge
       }.freeze
 
       TYPE = {
-        MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 => 'imsbasiclti_xmlv1p0',
+        MultiVersionCommonCartridge::CartridgeVersions::CC_1_1_0 => 'imsbasiclti_xmlv1p3',
         MultiVersionCommonCartridge::CartridgeVersions::CC_1_2_0 => 'imsbasiclti_xmlv1p0',
         MultiVersionCommonCartridge::CartridgeVersions::CC_1_3_0 => 'imsbasiclti_xmlv1p3',
         MultiVersionCommonCartridge::CartridgeVersions::THIN_CC_1_2_0 => 'imsbasiclti_xmlv1p0',
