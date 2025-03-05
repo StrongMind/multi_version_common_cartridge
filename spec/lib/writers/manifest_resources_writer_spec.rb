@@ -95,41 +95,63 @@ describe MultiVersionCommonCartridge::Writers::ManifestResourcesWriter do
       writer.finalize
     end
 
-    it 'has a resource element for the canvas course settings' do
-      expect(writer.root_resource_element.resources.count).to eq(1)
-    end
-
-    it 'has the identifier' do
-      expect(writer.root_resource_element.resources.first.identifier).to eq(identifier)
-    end
-
-    it 'has the href' do
-      expect(writer.root_resource_element.resources.first.href).to eq(href)
-    end
-
-    it 'has the type' do
-      expect(writer.root_resource_element.resources.first.type).to eq('webcontent')
-    end
-
     it 'has the files' do
       expect(writer.root_resource_element.resources.first.files.count).to eq(4)
     end
 
-    it 'has the course settings file' do
-      expect(writer.root_resource_element.resources.first.files[0].href).to eq('course_settings/course_settings.xml')
+    shared_examples 'base course settings data' do
+      it 'has a resource element for the canvas course settings' do
+        expect(writer.root_resource_element.resources.count).to eq(1)
+      end
+
+      it 'has the identifier' do
+        expect(writer.root_resource_element.resources.first.identifier).to eq(identifier)
+      end
+
+      it 'has the href' do
+        expect(writer.root_resource_element.resources.first.href).to eq(href)
+      end
+
+      it 'has the type' do
+        expect(writer.root_resource_element.resources.first.type).to eq('webcontent')
+      end
+
+      it 'has the course settings file' do
+        expect(writer.root_resource_element.resources.first.files[0].href).to eq('course_settings/course_settings.xml')
+      end
+
+      it 'has the canvas export file' do
+        expect(writer.root_resource_element.resources.first.files[1].href).to eq('course_settings/canvas_export.txt')
+      end
+
+      it 'has the assignment groups file' do
+        expect(writer.root_resource_element.resources.first.files[2].href).to eq('course_settings/assignment_groups.xml')
+      end
+
+      it 'has the module meta file' do
+        expect(writer.root_resource_element.resources.first.files[3].href).to eq('course_settings/module_meta.xml')
+      end
     end
 
-    it 'has the canvas export file' do
-      expect(writer.root_resource_element.resources.first.files[1].href).to eq('course_settings/canvas_export.txt')
-    end
+    include_examples 'base course settings data'
 
-    it 'has the assignment groups file' do
-      expect(writer.root_resource_element.resources.first.files[2].href).to eq('course_settings/assignment_groups.xml')
-    end
+    context 'when syllabus body is set' do
+      let(:syllabus_body) { 'some syllabus body' }
 
-    it 'has the module meta file' do
-      expect(writer.root_resource_element.resources.first.files[3].href).to eq('course_settings/module_meta.xml')
-    end
+      before do
+        canvas_resource.syllabus_body = syllabus_body
+        writer.finalize
+      end
 
+      it 'has the syllabus file' do
+        expect(writer.root_resource_element.resources.first.files[4].href).to eq('course_settings/syllabus.html')
+      end
+
+      it 'has the files' do
+        expect(writer.root_resource_element.resources.first.files.count).to eq(5)
+      end
+
+      include_examples 'base course settings data'
+    end
   end
 end

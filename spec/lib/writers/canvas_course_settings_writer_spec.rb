@@ -225,5 +225,32 @@ describe MultiVersionCommonCartridge::Writers::CanvasCourseSettingsWriter do
         expect(File.read(assignment_groups_filename)).to eq(xml_content)
       end
     end
+
+    context 'when a syllabus body is present' do
+      let(:syllabus_content) { "<html><body><h1>Syllabus</h1>#{syllabus_body}</body></html>" }
+      let(:syllabus_body) { SecureRandom.uuid }
+
+      before { course_settings.syllabus_body = syllabus_body }
+
+      it 'creates an html file with the syllabus element' do
+        Dir.mktmpdir do |dir|
+          sub_dir = File.join(dir, 'course_settings')
+          syllabus_filename = File.join(sub_dir, 'syllabus.html')
+          course_settings_writer.create_files(dir)
+          expect(File.read(syllabus_filename)).to eq(syllabus_content)
+        end
+      end
+    end
+
+    context 'when syllabus body is not present' do
+      it 'does not create the syllabus file' do
+        Dir.mktmpdir do |dir|
+          sub_dir = File.join(dir, 'course_settings')
+          syllabus_filename = File.join(sub_dir, 'syllabus.html')
+          course_settings_writer.create_files(dir)
+          expect(File.exist?(syllabus_filename)).to be_falsey
+        end
+      end
+    end
   end
 end
