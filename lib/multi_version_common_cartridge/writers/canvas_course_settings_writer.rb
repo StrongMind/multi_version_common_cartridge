@@ -89,7 +89,7 @@ module MultiVersionCommonCartridge
       end
 
       def syllabus_contents
-        "<html><body><h1>Syllabus</h1>#{resource.syllabus_body}</body></html>"
+        "<html><body>#{resource.syllabus_body}</body></html>"
       end
 
       def course_settings_element

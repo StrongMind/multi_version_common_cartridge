@@ -227,7 +227,7 @@ describe MultiVersionCommonCartridge::Writers::CanvasCourseSettingsWriter do
     end
 
     context 'when a syllabus body is present' do
-      let(:syllabus_content) { "<html><body><h1>Syllabus</h1>#{syllabus_body}</body></html>" }
+      let(:syllabus_content) { "<html><body>#{syllabus_body}</body></html>" }
       let(:syllabus_body) { SecureRandom.uuid }
 
       before { course_settings.syllabus_body = syllabus_body }
